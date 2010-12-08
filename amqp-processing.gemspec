@@ -4,13 +4,14 @@ require "amqp-processing/version"
 
 Gem::Specification.new do |s|
   s.name        = "amqp-processing"
-  s.version     = Amqp::Processing::VERSION
+  s.version     = AMQPProcessing::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = "http://rubygems.org/gems/amqp-processing"
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ["Jay McGavren"]
+  s.email       = ["jay@mcgavren.com"]
+  s.homepage    = "http://github.com/jaymcgavren/amqp-processing"
+  s.summary     = %q{A server that allows multiple users to view and program a shared Ruby-Processing sketch.}
+  s.description = %q{A server that allows multiple users to view and program a shared Ruby-Processing sketch.}
+  s.extra_rdoc_files = ["README.textile", "LICENSE"]
 
   s.rubyforge_project = "amqp-processing"
 
@@ -18,4 +19,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+  
+  s.add_development_dependency 'fuubar'
+  
 end

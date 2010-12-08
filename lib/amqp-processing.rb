@@ -1,5 +1,2 @@
-module Amqp
-  module Processing
-    # Your code goes here...
-  end
+module AMQPProcessing
 end
