@@ -1,9 +1,8 @@
-!https://github.com/jaymcgavren/amqp-processing/raw/master/amqp-processing.jpg(OS X, Windows, and Linux machines, all displaying the same sketch via amqp-processing)!
-
-
 h1. AMQP-Processing
 
 Ruby-Processing, Internet-enabled.
+
+!https://github.com/jaymcgavren/amqp-processing/raw/master/amqp-processing.jpg(OS X, Windows, and Linux machines, all displaying the same sketch via amqp-processing)!
 
 
 h1. Installation
