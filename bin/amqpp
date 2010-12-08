@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+address, port = ARGV
+
+$: << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'rubygems'
+require 'ruby-processing'
+require 'amqp-processing/client'
+java_import 'java.awt.event.WindowEvent'
+java_import 'java.awt.event.KeyEvent'
+require 'logger'
+
+Processing::SKETCH_PATH = ""
+
+class Sketch < Processing::App
+  def initialize(options = {})
+    @address = options[:address]
+    @port = options[:port] || 9000
+    super
+  end
+  def setup
+    $client = AMQPProcessing::Client.new
+    $client.app = self
+    $client.logger = Logger.new(STDOUT)
+    $client.connect(:host => @address, :port => @port)
+  end
+  def draw
+  end
+end
+
+sketch = Sketch.new(:address => address, :port => port, :width => 1280, :height => 1000, :title => '', :full_screen => false)
+
+
+ARGV.clear # So that IRB doesn't try to load arguments as files.
+
+require 'irb'
+IRB.setup(__FILE__)
+IRB.start

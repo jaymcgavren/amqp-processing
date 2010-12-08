@@ -1,0 +1,48 @@
+!http://github.com/jaymcgavren/amqp-processing/raw/master/amqp-processing.jpg(OS X, Windows, and Linux machines, all displaying the same sketch via amqp-processing)!
+
+
+h1. AMQP-Processing
+
+Ruby-Processing, Internet-enabled.
+
+
+h1. Installation
+
+<pre>
+  gem install ruby-processing amqp-processing
+</pre>
+
+
+h1. Running a Server
+
+<pre>
+  $ processing-server
+</pre>
+
+
+h1. Connecting to a Server
+
+<pre>
+  $ processing-client <server_address> <port>
+</pre>
+
+When the prompt appears, call Processing::App methods on the proxy object stored in $client.  The call will be duplicated on all clients currently connected to the server.
+
+<pre>
+  >> $client.stroke 100, 255, 50, 128
+  => nil
+  >> $client.oval 100, 100, 300, 200
+  => nil
+</pre>
+
+
+
+h1. Resources
+
+"Ruby-Processing Documentation":http://github.com/jashkenas/ruby-processing/wiki
+
+
+
+h1. Copyright
+
+Copyright (c) 2010 Jay McGavren. Released under the MIT license. See the LICENSE file for details.
