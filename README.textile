@@ -9,21 +9,14 @@ Ruby-Processing, Internet-enabled.
 h1. Installation
 
 <pre>
-  gem install ruby-processing amqp-processing
-</pre>
-
-
-h1. Running a Server
-
-<pre>
-  $ processing-server
+  gem install amqp ruby-processing amqp-processing
 </pre>
 
 
 h1. Connecting to a Server
 
 <pre>
-  $ processing-client <server_address> <port>
+  $ amqpp <server_address> <port>
 </pre>
 
 When the prompt appears, call Processing::App methods on the proxy object stored in $client.  The call will be duplicated on all clients currently connected to the server.
