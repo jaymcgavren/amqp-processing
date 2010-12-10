@@ -28,7 +28,7 @@ class Client
     @thread = Thread.new do
       AMQP.start(options) do
         @call_fanout = MQ.fanout('calls')
-        @call_queue = MQ.queue('calls client').bind(@call_fanout).subscribe do |message|
+        @call_queue = MQ.queue("q.#{rand(10000).to_i}").bind(@call_fanout, :key => "q.*").subscribe do |message|
           call = Marshal.load(message)
           sender_id, name, arguments = call.shift, call.shift, *call
           if sender_id == @client_id
