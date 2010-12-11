@@ -23,6 +23,7 @@ class Sketch < Processing::App
     $client.app = self
     $client.logger = Logger.new(STDOUT)
     $client.connect(:host => @address, :port => @port)
+    background 0
   end
   def draw
   end
