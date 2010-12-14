@@ -8,7 +8,7 @@ Ruby-Processing, Internet-enabled.
 h1. Installation
 
 <pre>
-  gem install amqp ruby-processing amqp-processing
+  gem install amqp-processing
 </pre>
 
 
