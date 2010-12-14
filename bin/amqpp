@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 address, port = ARGV
+address ||= 'localhost'
+port ||= 5672
 
 $: << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rubygems'
@@ -15,7 +17,7 @@ Processing::SKETCH_PATH = ""
 class Sketch < Processing::App
   def initialize(options = {})
     @address = options[:address]
-    @port = options[:port] || 9000
+    @port = options[:port]
     super
   end
   def setup
@@ -32,7 +34,7 @@ end
 sketch = Sketch.new(:address => address, :port => port, :width => 1280, :height => 1000, :title => '', :full_screen => false)
 
 
-ARGV.clear # So that IRB doesn't try to load arguments as files.
+ARGV.clear #IRB will load arguments as files unless we clear this.
 
 require 'irb'
 IRB.setup(__FILE__)
