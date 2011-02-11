@@ -7,16 +7,33 @@ Ruby-Processing, Internet-enabled.
 
 h1. Installation
 
+Install JRuby, if you haven't done so already.  This is most easily done with "rvm":http://rvm.beginrescueend.com/ :
+
 <pre>
-  gem install amqp-processing
+  $ bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+  $ rvm install jruby
+</pre>
+
+Then switch to your JRuby environment, and install the AMQP-Processing gem:
+
+<pre>
+  $ rvm use jruby
+  $ gem install amqp-processing
 </pre>
 
 
 h1. Connecting to a Server
 
+Once installation is complete, the "amqpp" executable should be available in your $PATH.  Run it like so:
+
 <pre>
-  $ amqpp <server_address> <port>
+  $ amqpp <server_address>
 </pre>
+
+Where server_address is the address of an AMQP server (like RabbitMQ).  You can provide a port number as a second argument if the server isn't using the standard AMQP port (5672).
+
+
+h1. Drawing
 
 When the prompt appears, call Processing::App methods on the proxy object stored in $client.  The call will be duplicated on all clients currently connected to the server.
 
@@ -27,14 +44,58 @@ When the prompt appears, call Processing::App methods on the proxy object stored
   => nil
 </pre>
 
+Here are a few basic method calls:
 
+<pre>
+  #Draw an opaque yellow line around shapes, 10 pixels wide.
+  red, green, blue, alpha = 128, 128, 0, 255
+  $client.stroke(red, green, blue, alpha)
+  $client.stroke_width 10
+  #Fill shapes with semi-transparent purple.
+  red, green, blue, alpha = 255, 0, 255, 128
+  $client.fill(red, green, blue, alpha)
+  #Draw shapes.
+  x, y = 200, 100
+  width, height = 400, 300
+  $client.rect(x, y, width, height)
+  $client.oval(x, y, width, height)
+</pre>
 
-h1. Resources
+You can find more examples to get you started here:
 
-"Ruby-Processing Documentation":http://github.com/jashkenas/ruby-processing/wiki
+"Samples from the Ruby-Processing project":https://github.com/jashkenas/ruby-processing/tree/master/samples/processing_app/basics
 
+The full Processing API is supported; you can read up on the various methods here:
+
+"API reference at processing.org":http://processing.org/reference/
+
+You can call your local Processing::App directly (without sending the call to other clients) via $client.app.  In this example, oval() would be sent over the wire, but mouse_x() and mouse_y() would not:
+
+<pre>
+  loop do
+    x = $client.app.mouse_x
+    y = $client.app.mouse_y
+    $client.oval(x, y, 100, 100)
+  end
+</pre>
+
+You can change the log level if you want network info:
+
+<pre>
+  >> $client.logger.level = Logger::DEBUG
+  >> $client.oval 99, 99, 99, 99
+  D, [2011-02-10T23:44:16.876000 #50478] DEBUG -- : sending as 34193642: oval, [99, 99, 99, 99]
+  D, [2011-02-10T23:44:17.029000 #50478] DEBUG -- : sender_id 34193642 == @client_id 34193642, ignoring
+</pre>
+
+If you don't want to prepend "$client" to everything, you can switch to the client's context in IRB:
+
+<pre>
+  >> irb $client        
+  >> oval 99, 99, 99, 99
+</pre>
 
 
 h1. Copyright
 
-Copyright (c) 2010 Jay McGavren. Released under the MIT license. See the LICENSE file for details.
+Copyright (c) 2010-2011 Jay McGavren. Released under the MIT license. See the LICENSE file for details.
