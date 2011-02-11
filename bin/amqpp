@@ -24,6 +24,7 @@ class Sketch < Processing::App
     $client = AMQPProcessing::Client.new
     $client.app = self
     $client.logger = Logger.new(STDOUT)
+    $client.logger.level = Logger::INFO
     $client.connect(:host => @address, :port => @port)
     background 0
   end

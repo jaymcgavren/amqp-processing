@@ -79,15 +79,6 @@ You can call your local Processing::App directly (without sending the call to ot
   end
 </pre>
 
-You can change the log level if you want network info:
-
-<pre>
-  >> $client.logger.level = Logger::DEBUG
-  >> $client.oval 99, 99, 99, 99
-  D, [2011-02-10T23:44:16.876000 #50478] DEBUG -- : sending as 34193642: oval, [99, 99, 99, 99]
-  D, [2011-02-10T23:44:17.029000 #50478] DEBUG -- : sender_id 34193642 == @client_id 34193642, ignoring
-</pre>
-
 If you don't want to prepend "$client" to everything, you can switch to the client's context in IRB:
 
 <pre>
